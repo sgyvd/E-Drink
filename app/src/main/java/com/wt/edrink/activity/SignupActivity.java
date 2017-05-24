@@ -19,4 +19,6 @@ public class SignupActivity extends BaseActivity {
     public int getLayoutId() {
         return R.layout.activity_signup;
     }
+
+
 }
