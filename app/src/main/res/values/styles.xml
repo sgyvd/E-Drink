@@ -17,6 +17,15 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <!--开启时的颜色-->
+        <item name="colorControlActivated">@color/green</item>
+        <!--关闭时的颜色-->
+        <item name="colorSwitchThumbNormal">@color/white</item>
+        <!--关闭时的轨迹颜色取30%的颜色-->
+        <item name="android:colorForeground">@color/white</item>
+    </style>
+
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

@@ -12,7 +12,8 @@ import com.wt.edrink.base.BaseActivity;
 public class MineActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        setToolbarTitle("我的");
+        setShowBack(true);
     }
 
     @Override

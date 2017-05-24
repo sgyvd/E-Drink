@@ -50,7 +50,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:text="水杯状况"
+                android:text="水杯"
                 android:textSize="18sp" />
 
             <TextView
@@ -72,7 +72,6 @@
                     android:drawablePadding="10dp"
                     android:drawableTop="@drawable/ic_water_temp"
                     android:gravity="center_horizontal"
-                    android:text="30"
                     android:textSize="30sp" />
 
                 <TextView
@@ -84,7 +83,6 @@
                     android:drawablePadding="10dp"
                     android:drawableTop="@drawable/ic_water_level"
                     android:gravity="center_horizontal"
-                    android:text="50"
                     android:textSize="30sp" />
 
             </LinearLayout>
@@ -117,7 +115,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:text="环境"
+                android:text="天气"
                 android:textSize="18sp" />
 
             <TextView
@@ -139,7 +137,6 @@
                     android:drawablePadding="10dp"
                     android:drawableTop="@drawable/ic_air_temp"
                     android:gravity="center_horizontal"
-                    android:text="30"
                     android:textSize="30sp" />
 
                 <TextView
@@ -151,7 +148,6 @@
                     android:drawablePadding="10dp"
                     android:drawableTop="@drawable/ic_air_humidity"
                     android:gravity="center_horizontal"
-                    android:text="50"
                     android:textSize="30sp" />
 
             </LinearLayout>
