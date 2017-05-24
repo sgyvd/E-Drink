@@ -9,15 +9,14 @@ import com.wt.edrink.base.BaseActivity;
  * Created by 美时美课 on 2017/5/24.
  */
 
-public class SignupActivity extends BaseActivity {
+public class MineActivity extends BaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
-        setShowBack(true);
+
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_signup;
+        return R.layout.activity_mine;
     }
-
 }

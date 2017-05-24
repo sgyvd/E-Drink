@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#30000000</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="window_bg">#F2F2F2</color>
+    <color name="divide_line">#E6E6E6</color>
+    <color name="item_press">#D6D6D6</color><!--item点击颜色-->
+
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
 </resources>

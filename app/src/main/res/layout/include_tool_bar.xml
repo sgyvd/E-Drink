@@ -4,7 +4,8 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:background="@color/white"
+    android:elevation="5dp"
     android:minHeight="?attr/actionBarSize"
     app:layout_scrollFlags="scroll|enterAlways"
     app:popupTheme="@style/ToolbarTheme"
@@ -18,7 +19,7 @@
         android:layout_gravity="right"
         android:maxLines="1"
         android:paddingRight="10dp"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/toolbar_title"
@@ -29,6 +30,6 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:scrollHorizontally="true"
-        android:textColor="@color/white" />
+        android:textColor="@color/black" />
 
 </android.support.v7.widget.Toolbar>
