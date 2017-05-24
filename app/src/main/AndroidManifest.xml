@@ -84,6 +84,8 @@
 
         <activity android:name=".activity.MineActivity" />
 
+        <activity android:name=".activity.ScanActivity" />
+
     </application>
 
 </manifest>

@@ -48,8 +48,6 @@ ext {
             //http
             "nohttp"         : "com.yanzhenjie.nohttp:nohttp:1.1.1",
             "nohttp-okhttp"  : "com.yanzhenjie.nohttp:okhttp:1.1.1",
-            //权限管理
-            "easypermissions": "pub.devrel:easypermissions:0.3.1",
             //时间选择器
             "PickerView"     : "com.contrarywind:Android-PickerView:3.2.4"
     ]

@@ -22,7 +22,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.rl_main_rank, R.id.rl_main_me})
+    @OnClick({R.id.rl_main_rank, R.id.rl_main_me, R.id.rl_main_scan})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_main_rank:
@@ -30,6 +30,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.rl_main_me:
                 Intents.getIntents().Intent(this, MineActivity.class, null);
+                break;
+            case R.id.rl_main_scan:
+
                 break;
         }
     }

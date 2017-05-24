@@ -6,6 +6,26 @@
     android:background="@color/window_bg"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:id="@+id/rl_main_scan"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/item_press_color"
+        android:clickable="true"
+        android:elevation="2dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawableLeft="@drawable/ic_main_scan"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:text="添加水杯"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -146,7 +166,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:background="@color/white"
         android:elevation="5dp"
         android:orientation="horizontal">
@@ -162,7 +182,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:drawableLeft="@drawable/ic_main_rank"
                 android:drawablePadding="5dp"
                 android:gravity="center"
