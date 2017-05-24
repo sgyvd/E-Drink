@@ -1,0 +1,55 @@
+ext {
+
+    def versionMajor = 1
+    def versionMinor = 0
+    def versionPatch = 0
+
+    def baseVersionCode = versionMajor * 100 + versionMinor * 10 + versionPatch
+    def baseVersionName = versionMajor + '.' + versionMinor + '.' + versionPatch
+
+    android = [
+            compileSdkVersion: 25,
+            buildToolsVersion: "25.0.2",
+
+            minSdkVersion    : 16,
+            targetSdkVersion : 21,
+
+            versionCode      : baseVersionCode,
+            versionName      : "${baseVersionName}",
+
+            VSupportSdk      : '25.3.1'
+    ]
+
+    dependencies = [
+            "appcompat-v7"   : "com.android.support:appcompat-v7:${android["VSupportSdk"]}",
+            "support-v4"     : "com.android.support:support-v4:${android["VSupportSdk"]}",
+            "design"         : "com.android.support:design:${android["VSupportSdk"]}",
+            "annotations"    : "com.android.support:support-annotations:${android["VSupportSdk"]}",
+            "recyclerview-v7": "com.android.support:recyclerview-v7:${android["VSupportSdk"]}",
+            //约束布局
+            "constraint"     : "com.android.support.constraint:constraint-layout:1.0.1",
+            //
+            "butterknife"    : "com.jakewharton:butterknife:8.4.0",
+            "butterknife-apt": "com.jakewharton:butterknife-compiler:8.4.0",
+            //网络图片加载
+            "glide"          : "com.github.bumptech.glide:glide:3.7.0",
+            //json解析
+            "gson"           : "com.google.code.gson:gson:2.6.2",
+            //事件总线
+            "eventbus"       : "org.greenrobot:eventbus:3.0.0",
+            //recyclerview封装
+            "xrecyclerview"  : "com.github.limedroid:ARecyclerView:v1.1.5",
+            //检测内存泄漏
+            "canary-debug"   : "com.squareup.leakcanary:leakcanary-android:1.4-beta2",
+            "canary-release" : "com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2",
+            //圆形头像
+            "circleimageview": "de.hdodenhof:circleimageview:2.1.0",
+            //http
+            "nohttp"         : "com.yanzhenjie.nohttp:nohttp:1.1.1",
+            "nohttp-okhttp"  : "com.yanzhenjie.nohttp:okhttp:1.1.1",
+            //权限管理
+            "easypermissions": "pub.devrel:easypermissions:0.3.1",
+            //时间选择器
+            "PickerView"     : "com.contrarywind:Android-PickerView:3.2.4"
+    ]
+}
