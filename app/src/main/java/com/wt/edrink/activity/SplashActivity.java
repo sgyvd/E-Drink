@@ -47,7 +47,7 @@ public class SplashActivity extends BaseActivity{
                     }
                     BaseActivity activity = weakReference.get();
                     UserPrefs userPrefs = new UserPrefs(activity);
-                    if (!TextUtils.isEmpty(userPrefs.getUserName())) {
+                    if (!TextUtils.isEmpty(userPrefs.getAuthKey())) {
                         Intents.getIntents().Intent(activity, MainActivity.class, null);
                     } else {
                         Intents.getIntents().Intent(activity, LoginActivity.class, null);

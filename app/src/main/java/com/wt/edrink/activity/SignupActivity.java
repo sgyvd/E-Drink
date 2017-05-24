@@ -13,12 +13,16 @@ import com.wt.edrink.bean.CommonBean;
 import com.wt.edrink.http.HttpManage;
 import com.wt.edrink.http.JavaBeanRequest;
 import com.wt.edrink.utils.Intents;
+import com.wt.edrink.utils.UserPrefs;
 import com.yanzhenjie.nohttp.rest.OnResponseListener;
 import com.yanzhenjie.nohttp.rest.Request;
 import com.yanzhenjie.nohttp.rest.Response;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.droidlover.xdroid.kit.Codec;
+import cn.droidlover.xdroid.kit.ExitApp;
+import cn.droidlover.xdroid.kit.RegexUtils;
 import cn.droidlover.xdroid.kit.ToastUtils;
 
 /**
@@ -48,15 +52,16 @@ public class SignupActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_signup:
-               /* if (!checkUserOrPassEmpty()) {
+                if (!checkUserOrPassEmpty()) {
                     return;
                 }
                 if (!RegexUtils.isMobileNumber(getUserName())) {
                     ToastUtils.showShort(context, "手机号格式错误");
                     return;
-                }*/
-                Intents.getIntents().Intent(context, MainActivity.class, null);
-
+                }
+                httpPost(getUserName(), getPassWord());
+                /*Intents.getIntents().Intent(context, MainActivity.class, null);
+                ExitApp.getInstance().exit();*/
                 break;
         }
     }
@@ -80,20 +85,22 @@ public class SignupActivity extends BaseActivity {
         @Override
         public void onSucceed(int what, Response response) {
             CommonBean data = (CommonBean) response.get();
+            Log.e(TAG, "注册error_code:" + data.getError_code() + "----reason:" + data.getReason() + "----result:" + data.getResult());
             if (data.getError_code() == 10002) {
                 ToastUtils.showShort(context, data.getReason());
+                UserPrefs userPrefs = new UserPrefs(context);
+                userPrefs.setAuthKey(data.getResult());
 
                 Intents.getIntents().Intent(context, MainActivity.class, null);
-
+                ExitApp.getInstance().exit();
             } else {
                 ToastUtils.showShort(context, data.getReason());
-                Log.e(TAG, "注册error_code:" + data.getError_code() + "----error_msg:" + data.getReason());
             }
         }
 
         @Override
         public void onFailed(int what, Response response) {
-
+            ToastUtils.showLong(context, "网络错误");
         }
 
         @Override
@@ -125,7 +132,8 @@ public class SignupActivity extends BaseActivity {
     }
 
     private String getPassWord() {
-        return etPassword.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        return Codec.MD5.getMessageDigest(password);
     }
 
 }

@@ -1,6 +1,9 @@
 package com.wt.edrink.activity;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,9 +26,14 @@ import cn.droidlover.xdroid.kit.ToastUtils;
 
 
 public class MainActivity extends BaseActivity {
+    private String TAG = "MainActivity";
 
     private final static int HTTP_HOME_PAGE = 01;
 
+    @BindView(R.id.swipe_main)
+    SwipeRefreshLayout swipeLayout;
+    @BindView(R.id.tv_main_time)
+    TextView tvTime;
     @BindView(R.id.tv_water_temp)
     TextView tvWaterTemp;
     @BindView(R.id.tv_water_level)
@@ -39,18 +47,20 @@ public class MainActivity extends BaseActivity {
     private UserPrefs userPrefs;
 
 
-
-
     @Override
     public void initData(Bundle savedInstanceState) {
         userPrefs = new UserPrefs(context);
-        if (userPrefs.getCupnum() == null) {
-            tvWaterTemp.setText("- -");
-            tvWaterLevel.setText("- -");
-            tvAirTemp.setText("- -");
-            tvAirHumidity.setText("- -");
-            ToastUtils.showLong(context, "请先添加水杯");
-        }
+    }
+
+    @Override
+    public void setListener() {
+        super.setListener();
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                httpHomeInfo();
+            }
+        });
     }
 
     @Override
@@ -73,35 +83,62 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
+
     /**
      * http首页数据
      */
     private void httpHomeInfo() {
-        Request<HomeBean> request = new JavaBeanRequest<HomeBean>(Constants.URL_HOME_PAGE, RequestMethod.POST, HomeBean.class);
+
+        String url = Constants.URL_HOME_PAGE + userPrefs.getCupnum() + "/latest.json";
+        Log.e(TAG, "--------------" + url);
+
+        final Request<HomeBean> request = new JavaBeanRequest<HomeBean>(url, RequestMethod.GET, HomeBean.class);
         // 添加到请求队列
-        HttpManage.httpRequest(HTTP_HOME_PAGE, request, onResponseListener);
+        HttpManage.httpRequest(HTTP_HOME_PAGE, request, new OnResponseListener<HomeBean>() {
+            @Override
+            public void onStart(int what) {
+                swipeLayout.setRefreshing(true);
+            }
+
+            @Override
+            public void onSucceed(int what, Response<HomeBean> response) {
+                HomeBean data = response.get();
+                if (!TextUtils.isEmpty(data.getWater_temperature())) {
+                    tvWaterTemp.setText(data.getWater_temperature());
+                }
+                if (!TextUtils.isEmpty(data.getWater_level())) {
+                    tvWaterLevel.setText(data.getWater_level());
+                }
+                if (!TextUtils.isEmpty(data.getAir_temperature())) {
+                    tvAirTemp.setText(data.getAir_temperature());
+                }
+                if (!TextUtils.isEmpty(data.getAir_humidity())) {
+                    tvAirHumidity.setText(data.getAir_humidity());
+                }
+                String time = data.getMonth() + "-" + data.getDay() + " " + data.getHour() + "-" + data.getMinute();
+                tvTime.setText(time);
+                swipeLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailed(int what, Response<HomeBean> response) {
+                ToastUtils.showLong(context, "网络错误");
+            }
+
+            @Override
+            public void onFinish(int what) {
+
+            }
+        });
     }
 
-    private OnResponseListener onResponseListener = new OnResponseListener() {
-        @Override
-        public void onStart(int what) {
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (userPrefs.getCupnum() == null) {
+            ToastUtils.showLong(context, "请先添加水杯");
+        } else {
+            httpHomeInfo();
         }
-
-        @Override
-        public void onSucceed(int what, Response response) {
-
-        }
-
-        @Override
-        public void onFailed(int what, Response response) {
-
-        }
-
-        @Override
-        public void onFinish(int what) {
-
-        }
-    };
-
+    }
 }

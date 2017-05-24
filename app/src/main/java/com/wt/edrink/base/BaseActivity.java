@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.wt.edrink.R;
 
 import cn.droidlover.xdroid.base.XActivity;
+import cn.droidlover.xdroid.kit.ExitApp;
 import cn.droidlover.xdroid.kit.NetWorkUtils;
 import cn.droidlover.xdroid.kit.ToastUtils;
 
@@ -24,6 +25,7 @@ public abstract class BaseActivity extends XActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ExitApp.getInstance().addActivity(this);
     }
 
     @Override
@@ -75,5 +77,11 @@ public abstract class BaseActivity extends XActivity {
 
     public TextView getToolbarSubTitle() {
         return (TextView) findViewById(R.id.toolbar_subtitle);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ExitApp.getInstance().delActivity(this);
     }
 }

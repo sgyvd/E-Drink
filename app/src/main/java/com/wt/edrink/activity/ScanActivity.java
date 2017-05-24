@@ -1,5 +1,6 @@
 package com.wt.edrink.activity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.widget.SwitchCompat;
@@ -7,8 +8,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CompoundButton;
 
+import com.google.gson.Gson;
+import com.wt.edrink.Constants;
 import com.wt.edrink.R;
 import com.wt.edrink.base.BaseActivity;
+import com.wt.edrink.bean.CommonBean;
+import com.wt.edrink.bean.ScanBean;
+import com.wt.edrink.http.HttpManage;
+import com.wt.edrink.http.JavaBeanRequest;
+import com.wt.edrink.utils.UserPrefs;
+import com.yanzhenjie.nohttp.rest.OnResponseListener;
+import com.yanzhenjie.nohttp.rest.Request;
+import com.yanzhenjie.nohttp.rest.Response;
 
 import butterknife.BindView;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
@@ -26,6 +37,8 @@ public class ScanActivity extends BaseActivity {
     SwitchCompat switchLight;
 
     private Toolbar toolbar;
+    private UserPrefs userPrefs;
+    private ProgressDialog progressDialog;
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -38,6 +51,9 @@ public class ScanActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+        userPrefs = new UserPrefs(context);
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("正在绑定...");
 
         initScan();
     }
@@ -77,7 +93,15 @@ public class ScanActivity extends BaseActivity {
         public void onScanQRCodeSuccess(String result) {
             vibrator();
             ToastUtils.showShort(context, result);
-            qrCodeView.startSpot();//开始识别
+            Gson gson = new Gson();
+            ScanBean data = gson.fromJson(result, ScanBean.class);
+            if (data.getDevice_pwd() == null || data.getDevice_id() == null) {
+                ToastUtils.showShort(context, "无法识别二维码");
+                qrCodeView.startSpot();//开始识别
+            } else {
+                httpPost(data.getDevice_id(), data.getDevice_pwd());
+            }
+
         }
 
         @Override
@@ -86,6 +110,43 @@ public class ScanActivity extends BaseActivity {
             context.finish();
         }
     };
+
+    //绑定设备
+    private void httpPost(final String deviceId, String devicePwd) {
+        Request<CommonBean> request = new JavaBeanRequest<CommonBean>(Constants.URL_LOGIN, CommonBean.class);
+        request.add(Constants.AUTHKEY, userPrefs.getAuthKey());
+        request.add(Constants.DEVICE_ID, deviceId);
+        request.add(Constants.DEVICE_PWD, devicePwd);
+        HttpManage.httpRequest(0, request, new OnResponseListener<CommonBean>() {
+            @Override
+            public void onStart(int what) {
+                progressDialog.show();
+            }
+
+            @Override
+            public void onSucceed(int what, Response<CommonBean> response) {
+                CommonBean data = response.get();
+                if (data.getError_code() == 10009) {
+                    ToastUtils.showShort(context, "设备绑定成功");
+                    userPrefs.setCupnum(deviceId);
+                    context.finish();
+                } else {
+                    ToastUtils.showShort(context, data.getReason());
+                    qrCodeView.startSpot();//开始识别
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<CommonBean> response) {
+                ToastUtils.showShort(context, "网络请求失败");
+            }
+
+            @Override
+            public void onFinish(int what) {
+                progressDialog.dismiss();
+            }
+        });
+    }
 
     private void vibrator() {
         //获取系统震动服务
