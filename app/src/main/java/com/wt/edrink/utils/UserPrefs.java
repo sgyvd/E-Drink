@@ -19,16 +19,23 @@ public class UserPrefs {
         this.context = context;
     }
 
-    public void setAuthKey(String authkey) {
+    public void setAuthKeyAndUserName(String authkey, String username) {
         SharedPref.getInstance(context).putString(KEY_AUTH, authkey);
+        String str = username.substring(0, 3) + "****" + username.substring(7);
+        SharedPref.getInstance(context).putString(KEY_USERNAME, str);
     }
 
     public String getAuthKey() {
         return SharedPref.getInstance(context).getString(KEY_AUTH, null);
     }
 
-    public void clearAuthKey() {
+    public String getUserName() {
+        return SharedPref.getInstance(context).getString(KEY_USERNAME, null);
+    }
+
+    public void clearAuthKeyAndUserName() {
         SharedPref.getInstance(context).putString(KEY_AUTH, null);
+        SharedPref.getInstance(context).putString(KEY_USERNAME, null);
     }
 
     public void setDeviceId(String num) {

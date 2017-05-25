@@ -110,7 +110,7 @@ public class LoginActivity extends BaseActivity {
                 if (data.getError_code() == 10004) {
                     ToastUtils.showShort(context, data.getReason());
                     UserPrefs userPrefs = new UserPrefs(context);
-                    userPrefs.setAuthKey(data.getResult());
+                    userPrefs.setAuthKeyAndUserName(data.getResult(), username);
 
                     Intents.getIntents().Intent(context, MainActivity.class, null);
                     context.finish();

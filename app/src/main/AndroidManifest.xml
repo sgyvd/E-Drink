@@ -102,7 +102,11 @@
 
         <activity android:name=".activity.ScanActivity" />
 
+        <activity android:name=".activity.HealthActivity" />
+
         <activity android:name=".activity.MyDevicesActivity" />
+
+        <activity android:name=".activity.MineInfoActivity" />
 
     </application>
 

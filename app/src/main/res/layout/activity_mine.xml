@@ -41,13 +41,12 @@
                     app:civ_border_width="2dp" />
 
                 <TextView
+                    android:id="@+id/tv_mine_username"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/img_mine_user_avatar"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="1570****661"
                     android:textSize="18sp" />
 
                 <ImageView

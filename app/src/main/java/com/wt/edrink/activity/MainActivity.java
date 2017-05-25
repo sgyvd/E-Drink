@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.rl_main_rank, R.id.rl_main_me, R.id.rl_main_scan})
+    @OnClick({R.id.rl_main_rank, R.id.rl_main_me, R.id.rl_main_health, R.id.rl_main_scan})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_main_rank:
@@ -82,6 +82,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.rl_main_me:
                 Intents.getIntents().Intent(this, MineActivity.class, null);
+                break;
+            case R.id.rl_main_health:
+                Intents.getIntents().Intent(this, HealthActivity.class, null);
                 break;
             case R.id.rl_main_scan:
                 Intents.getIntents().Intent(this, ScanActivity.class, null);
@@ -97,7 +100,7 @@ public class MainActivity extends BaseActivity {
         String url = Constants.URL_HOME_PAGE + userPrefs.getDeviceId() + "/latest.json";
         Log.e(TAG, "--------------" + url);
 
-        final Request<HomeBean> request = new JavaBeanRequest<HomeBean>(url, RequestMethod.GET, HomeBean.class);
+        Request<HomeBean> request = new JavaBeanRequest<HomeBean>(url, RequestMethod.GET, HomeBean.class);
         // 添加到请求队列
         HttpManage.httpRequest(HTTP_HOME_PAGE, request, new OnResponseListener<HomeBean>() {
             @Override
@@ -109,6 +112,10 @@ public class MainActivity extends BaseActivity {
             public void onSucceed(int what, Response<HomeBean> response) {
                 HomeBean data = response.get();
                 if (data == null) {
+                    tvWaterTemp.setText("- -");
+                    tvWaterLevel.setText("- -");
+                    tvAirTemp.setText("- -");
+                    tvAirHumidity.setText("- -");
                     ToastUtils.showShort(context, "无数据");
                 } else {
                     if (!TextUtils.isEmpty(data.getWater_temperature())) {

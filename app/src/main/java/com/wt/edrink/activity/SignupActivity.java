@@ -96,7 +96,7 @@ public class SignupActivity extends BaseActivity {
             if (data.getError_code() == 10002) {
                 ToastUtils.showShort(context, data.getReason());
                 UserPrefs userPrefs = new UserPrefs(context);
-                userPrefs.setAuthKey(data.getResult());
+                userPrefs.setAuthKeyAndUserName(data.getResult(), getUserName());
 
                 Intents.getIntents().Intent(context, MainActivity.class, null);
                 ExitApp.getInstance().exit();

@@ -26,6 +26,7 @@ public class Constants {
     //首页
     public static final String URL_HOME_PAGE = "https://dddddooo.wilddogio.com/";
 
+
     //绑定设备
     public static final String URL_BING = BASE_URL + "/cup/bind";
     //解绑设备
@@ -33,12 +34,19 @@ public class Constants {
     //已绑定设备列表
     public static final String URL_DEVICE_LIST = BASE_URL + "/cup/device_list";
 
+
     //排行榜
     public static final String URL_RANK = BASE_URL + "/data/rank";
     //排行榜状态
     public static final String URL_RANK_STATUS = BASE_URL + "/data/ShowRankStatus";
     //排行榜开关
     public static final String URL_RANK_SWITCH = BASE_URL + "/data/SwitchRank";
+
+
+    //今日饮水量
+    public static final String URL_TODAY_TOTAL = BASE_URL + "/data/todayTotal";
+    //健康值
+    public static final String URL_HEALTH_STATUS = BASE_URL + "/data/healthyStatus";
 
 }
 

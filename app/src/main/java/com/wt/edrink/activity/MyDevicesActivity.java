@@ -83,6 +83,7 @@ public class MyDevicesActivity extends BaseActivity {
                     break;
                 case R.id.btn_mydevice_unbind:
                     httpUnBind(model.getDevice_id());
+                    Log.e(TAG,model.getDevice_id());
                     break;
             }
         }
@@ -131,7 +132,7 @@ public class MyDevicesActivity extends BaseActivity {
     private void httpUnBind(final String deviceid) {
         Request<CommonBean> request = new JavaBeanRequest<CommonBean>(Constants.URL_UN_BIND, CommonBean.class);
         request.add(Constants.AUTH_KEY, getAuthKey());
-        request.add(Constants.DEVICE_ID, getDeviceId());
+        request.add(Constants.DEVICE_ID, deviceid);
         HttpManage.httpRequest(1, request, new OnResponseListener<CommonBean>() {
             @Override
             public void onStart(int what) {

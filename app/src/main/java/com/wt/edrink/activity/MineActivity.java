@@ -33,6 +33,8 @@ public class MineActivity extends BaseActivity {
 
     UserPrefs userPrefs = new UserPrefs(context);
 
+    @BindView(R.id.tv_mine_username)
+    TextView tvUserName;
     @BindView(R.id.switch_mine_rank)
     SwitchCompat switchRank;
     @BindView(R.id.tv_mine_device_id)
@@ -42,6 +44,8 @@ public class MineActivity extends BaseActivity {
     public void initData(Bundle savedInstanceState) {
         setToolbarTitle("我的");
         setShowBack(true);
+
+        initView();
     }
 
     @Override
@@ -64,18 +68,26 @@ public class MineActivity extends BaseActivity {
         return R.layout.activity_mine;
     }
 
+    private void initView() {
+        tvUserName.setText(userPrefs.getUserName());
+    }
+
 
     @OnClick({R.id.ll_mine_info, R.id.ll_mine_select_device, R.id.tv_mine_quit})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_mine_info:
-
+                if (userPrefs.getDeviceId() != null) {
+                    Intents.getIntents().Intent(context, MineInfoActivity.class, null);
+                } else {
+                    ToastUtils.showShort(context, "请先选择水杯");
+                }
                 break;
             case R.id.ll_mine_select_device:
                 Intents.getIntents().Intent(context, MyDevicesActivity.class, null);
                 break;
             case R.id.tv_mine_quit:
-                userPrefs.clearAuthKey();
+                userPrefs.clearAuthKeyAndUserName();
                 userPrefs.clearDeviceId();
 
                 Intents.getIntents().Intent(context, LoginActivity.class, null);
@@ -129,9 +141,9 @@ public class MineActivity extends BaseActivity {
                     break;
                 case 1:
                     Log.e(TAG, "选择排行榜error_code:" + data.getError_code() + "----reason:" + data.getReason() + "----result:" + data.getResult());
-                    if (data.getError_code() == 10036) {
+                    if (data.getError_code() == 10037) {
 
-                    } else if (data.getError_code() == 10037) {
+                    } else if (data.getError_code() == 10038) {
 
                     } else {
                         ToastUtils.showShort(context, "失败");

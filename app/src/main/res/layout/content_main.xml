@@ -296,6 +296,34 @@
                     android:background="@color/divide_line" />
 
                 <RelativeLayout
+                    android:id="@+id/rl_main_health"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/item_press_color"
+                    android:clickable="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/ic_main_helgth"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="健康计划"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/divide_line" />
+
+                <RelativeLayout
                     android:id="@+id/rl_main_me"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
