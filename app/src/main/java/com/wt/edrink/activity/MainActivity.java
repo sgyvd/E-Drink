@@ -58,7 +58,7 @@ public class MainActivity extends BaseActivity {
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (userPrefs.getCupnum() == null) {
+                if (userPrefs.getDeviceId() == null) {
                     ToastUtils.showLong(context, "请先添加水杯");
                     swipeLayout.setRefreshing(false);
                 } else {
@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity {
      */
     private void httpHomeInfo() {
 
-        String url = Constants.URL_HOME_PAGE + userPrefs.getCupnum() + "/latest.json";
+        String url = Constants.URL_HOME_PAGE + userPrefs.getDeviceId() + "/latest.json";
         Log.e(TAG, "--------------" + url);
 
         final Request<HomeBean> request = new JavaBeanRequest<HomeBean>(url, RequestMethod.GET, HomeBean.class);
@@ -109,7 +109,7 @@ public class MainActivity extends BaseActivity {
             public void onSucceed(int what, Response<HomeBean> response) {
                 HomeBean data = response.get();
                 if (data == null) {
-                    ToastUtils.showLong(context, "网络请求错误");
+                    ToastUtils.showShort(context, "无数据");
                 } else {
                     if (!TextUtils.isEmpty(data.getWater_temperature())) {
                         tvWaterTemp.setText(data.getWater_temperature());
@@ -144,7 +144,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (userPrefs.getCupnum() == null) {
+        if (userPrefs.getDeviceId() == null) {
             ToastUtils.showLong(context, "请先添加水杯");
         } else {
             httpHomeInfo();

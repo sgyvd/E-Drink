@@ -20,22 +20,20 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_rank_mobile"
+            android:id="@+id/tv_rank_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/tv_rank_num"
-            android:text="157****4661"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_rank_health_num"
+            android:id="@+id/tv_rank_health_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="30dp"
             android:layout_toLeftOf="@+id/tv_rank_like"
-            android:text="90"
             android:textColor="#6ADA82"
             android:textSize="20sp" />
 

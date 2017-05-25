@@ -75,29 +75,71 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tv_water_temp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:drawablePadding="10dp"
-                            android:drawableTop="@drawable/ic_water_temp"
-                            android:gravity="center_horizontal"
-                            android:text="- -"
-                            android:textSize="30sp" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
-                        <TextView
-                            android:id="@+id/tv_water_level"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:drawablePadding="10dp"
-                            android:drawableTop="@drawable/ic_water_level"
-                            android:gravity="center_horizontal"
-                            android:text="- -"
-                            android:textSize="30sp" />
+                            <ImageView
+                                android:id="@+id/img_water_temp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="30dp"
+                                android:src="@drawable/ic_water_temp" />
+
+                            <TextView
+                                android:id="@+id/tv_water_temp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/img_water_temp"
+                                android:layout_centerHorizontal="true"
+                                android:text="- -"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBottom="@+id/tv_water_temp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/tv_water_temp"
+                                android:text="℃"
+                                android:textSize="20sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/img_water_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="30dp"
+                                android:src="@drawable/ic_water_level" />
+
+                            <TextView
+                                android:id="@+id/tv_water_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/img_water_level"
+                                android:layout_centerHorizontal="true"
+                                android:text="- -"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBottom="@+id/tv_water_level"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/tv_water_level"
+                                android:text="mL"
+                                android:textSize="20sp" />
+
+                        </RelativeLayout>
 
                     </LinearLayout>
 
@@ -142,29 +184,71 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tv_air_temp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:drawablePadding="10dp"
-                            android:drawableTop="@drawable/ic_air_temp"
-                            android:gravity="center_horizontal"
-                            android:text="- -"
-                            android:textSize="30sp" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
-                        <TextView
-                            android:id="@+id/tv_air_humidity"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:drawablePadding="10dp"
-                            android:drawableTop="@drawable/ic_air_humidity"
-                            android:gravity="center_horizontal"
-                            android:text="- -"
-                            android:textSize="30sp" />
+                            <ImageView
+                                android:id="@+id/img_air_temp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="30dp"
+                                android:src="@drawable/ic_air_temp" />
+
+                            <TextView
+                                android:id="@+id/tv_air_temp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/img_air_temp"
+                                android:layout_centerHorizontal="true"
+                                android:text="- -"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBottom="@+id/tv_air_temp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/tv_air_temp"
+                                android:text="℃"
+                                android:textSize="20sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:id="@+id/img_air_humidity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="30dp"
+                                android:src="@drawable/ic_air_humidity" />
+
+                            <TextView
+                                android:id="@+id/tv_air_humidity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/img_air_humidity"
+                                android:layout_centerHorizontal="true"
+                                android:text="- -"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBottom="@+id/tv_air_humidity"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/tv_air_humidity"
+                                android:text="%"
+                                android:textSize="20sp" />
+
+                        </RelativeLayout>
 
                     </LinearLayout>
 

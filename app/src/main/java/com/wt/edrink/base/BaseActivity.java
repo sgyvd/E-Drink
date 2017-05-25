@@ -47,8 +47,8 @@ public abstract class BaseActivity extends XActivity {
     public String getAuthKey() {
         return userPrefs.getAuthKey();
     }
-    public String getCupnum(){
-        return userPrefs.getCupnum();
+    public String getDeviceId(){
+        return userPrefs.getDeviceId();
     }
 
     public void setToolbarTitle(String title) {

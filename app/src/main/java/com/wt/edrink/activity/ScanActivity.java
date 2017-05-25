@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 
@@ -30,6 +31,7 @@ import cn.droidlover.xdroid.kit.ToastUtils;
  */
 
 public class ScanActivity extends BaseActivity {
+    private static String TAG = "ScanActivity";
 
     @BindView(R.id.zxingview_scan)
     QRCodeView qrCodeView;
@@ -99,6 +101,7 @@ public class ScanActivity extends BaseActivity {
                 ToastUtils.showShort(context, "无法识别二维码");
                 qrCodeView.startSpot();//开始识别
             } else {
+                Log.e(TAG, data.getDevice_id() + "-----" + data.getDevice_pwd());
                 httpPost(data.getDevice_id(), data.getDevice_pwd());
             }
 
@@ -113,8 +116,8 @@ public class ScanActivity extends BaseActivity {
 
     //绑定设备
     private void httpPost(final String deviceId, String devicePwd) {
-        Request<CommonBean> request = new JavaBeanRequest<CommonBean>(Constants.URL_LOGIN, CommonBean.class);
-        request.add(Constants.AUTHKEY, userPrefs.getAuthKey());
+        Request<CommonBean> request = new JavaBeanRequest<CommonBean>(Constants.URL_BING, CommonBean.class);
+        request.add(Constants.AUTH_KEY, userPrefs.getAuthKey());
         request.add(Constants.DEVICE_ID, deviceId);
         request.add(Constants.DEVICE_PWD, devicePwd);
         HttpManage.httpRequest(0, request, new OnResponseListener<CommonBean>() {
@@ -128,7 +131,7 @@ public class ScanActivity extends BaseActivity {
                 CommonBean data = response.get();
                 if (data.getError_code() == 10009) {
                     ToastUtils.showShort(context, "设备绑定成功");
-                    userPrefs.setCupnum(deviceId);
+                    userPrefs.setDeviceId(deviceId);
                     context.finish();
                 } else {
                     ToastUtils.showShort(context, data.getReason());

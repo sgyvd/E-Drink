@@ -31,15 +31,15 @@ public class UserPrefs {
         SharedPref.getInstance(context).putString(KEY_AUTH, null);
     }
 
-    public void setCupnum(String num) {
+    public void setDeviceId(String num) {
         SharedPref.getInstance(context).putString(KEY_CUP_NUM, num);
     }
 
-    public String getCupnum() {
+    public String getDeviceId() {
         return SharedPref.getInstance(context).getString(KEY_CUP_NUM, null);
     }
 
-    public void clearCupnum() {
+    public void clearDeviceId() {
         SharedPref.getInstance(context).putString(KEY_CUP_NUM, null);
     }
 }

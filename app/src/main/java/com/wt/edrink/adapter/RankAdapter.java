@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.wt.edrink.R;
-import com.wt.edrink.bean.RankListBean;
+import com.wt.edrink.bean.RankBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,7 +16,7 @@ import cn.droidlover.xdroid.base.SimpleRecAdapter;
  * Created by 美时美课 on 2017/5/24.
  */
 
-public class RankAdapter extends SimpleRecAdapter<RankListBean, RecyclerView.ViewHolder> {
+public class RankAdapter extends SimpleRecAdapter<RankBean, RecyclerView.ViewHolder> {
     public RankAdapter(Context context) {
         super(context);
     }
@@ -33,13 +33,14 @@ public class RankAdapter extends SimpleRecAdapter<RankListBean, RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        RankListBean item = data.get(position);
+        RankBean item = data.get(position);
         ((mViewHolder) holder).tvNum.setText(position + 1 + "");
-        ((mViewHolder) holder).tvUserName.setText(item.getNickName());
+        ((mViewHolder) holder).tvUserName.setText(item.getUserName());
+        ((mViewHolder) holder).tvHealth.setText(item.getHealthyStatus());
         ((mViewHolder) holder).tvLike.setOnClickListener(onClickListener(position, item));
     }
 
-    private View.OnClickListener onClickListener(final int position, final RankListBean model) {
+    private View.OnClickListener onClickListener(final int position, final RankBean model) {
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,8 +53,10 @@ public class RankAdapter extends SimpleRecAdapter<RankListBean, RecyclerView.Vie
     public class mViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_rank_num)
         TextView tvNum;
-        @BindView(R.id.tv_rank_mobile)
+        @BindView(R.id.tv_rank_username)
         TextView tvUserName;
+        @BindView(R.id.tv_rank_health_status)
+        TextView  tvHealth;
         @BindView(R.id.tv_rank_like)
         TextView tvLike;
 

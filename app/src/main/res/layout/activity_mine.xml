@@ -42,12 +42,56 @@
 
             </RelativeLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_mine_select_device"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/item_press_color"
+                android:clickable="true"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="选择水杯"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_mine_device_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_black_right" />
+            </LinearLayout>
+
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_mine_rank"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/item_press_color"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="公开数据到排行榜"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/tv_mine_quit"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="45dp"
                 android:background="@drawable/item_press_color"
                 android:clickable="true"
                 android:gravity="center"
