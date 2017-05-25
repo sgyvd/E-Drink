@@ -1,5 +1,6 @@
 package com.wt.edrink.activity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,9 +38,14 @@ public class SignupActivity extends BaseActivity {
     @BindView(R.id.et_signup_password)
     EditText etPassword;
 
+    private ProgressDialog progressDialog;
+
+
     @Override
     public void initData(Bundle savedInstanceState) {
         setShowBack(true);
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("正在注册...");
     }
 
     @Override
@@ -59,6 +65,7 @@ public class SignupActivity extends BaseActivity {
                     ToastUtils.showShort(context, "手机号格式错误");
                     return;
                 }
+                progressDialog.show();
                 httpPost(getUserName(), getPassWord());
                 /*Intents.getIntents().Intent(context, MainActivity.class, null);
                 ExitApp.getInstance().exit();*/
@@ -96,11 +103,12 @@ public class SignupActivity extends BaseActivity {
             } else {
                 ToastUtils.showShort(context, data.getReason());
             }
+            progressDialog.dismiss();
         }
 
         @Override
         public void onFailed(int what, Response response) {
-            ToastUtils.showLong(context, "网络错误");
+            ToastUtils.showLong(context, "网络请求失败");
         }
 
         @Override

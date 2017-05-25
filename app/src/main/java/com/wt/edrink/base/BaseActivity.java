@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.wt.edrink.R;
+import com.wt.edrink.utils.UserPrefs;
 
 import cn.droidlover.xdroid.base.XActivity;
 import cn.droidlover.xdroid.kit.ExitApp;
@@ -21,6 +22,7 @@ public abstract class BaseActivity extends XActivity {
     private Toolbar mToolbar;
     private TextView mToolbarTitle;
     private TextView mToolbarSubTitle;
+    private UserPrefs userPrefs = new UserPrefs(context);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +33,22 @@ public abstract class BaseActivity extends XActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (!NetWorkUtils.isNetworkConnected(context)){
-            ToastUtils.showShort(context,"网络异常，请检查网络状态");
+        if (!NetWorkUtils.isNetworkConnected(context)) {
+            ToastUtils.showShort(context, "网络异常，请检查网络状态");
         }
     }
 
     @Override
     public void setListener() {
 
+    }
+
+
+    public String getAuthKey() {
+        return userPrefs.getAuthKey();
+    }
+    public String getCupnum(){
+        return userPrefs.getCupnum();
     }
 
     public void setToolbarTitle(String title) {

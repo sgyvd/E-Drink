@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.wt.edrink.R;
+import com.wt.edrink.bean.RankListBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,7 +16,7 @@ import cn.droidlover.xdroid.base.SimpleRecAdapter;
  * Created by 美时美课 on 2017/5/24.
  */
 
-public class RankAdapter extends SimpleRecAdapter<String, RecyclerView.ViewHolder> {
+public class RankAdapter extends SimpleRecAdapter<RankListBean, RecyclerView.ViewHolder> {
     public RankAdapter(Context context) {
         super(context);
     }
@@ -32,13 +33,13 @@ public class RankAdapter extends SimpleRecAdapter<String, RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        String item = data.get(position);
+        RankListBean item = data.get(position);
         ((mViewHolder) holder).tvNum.setText(position + 1 + "");
-        ((mViewHolder) holder).tvMobile.setText(item.substring(0, 4) + "****" + item.substring(7));
+        ((mViewHolder) holder).tvUserName.setText(item.getNickName());
         ((mViewHolder) holder).tvLike.setOnClickListener(onClickListener(position, item));
     }
 
-    private View.OnClickListener onClickListener(final int position, final String model) {
+    private View.OnClickListener onClickListener(final int position, final RankListBean model) {
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +53,7 @@ public class RankAdapter extends SimpleRecAdapter<String, RecyclerView.ViewHolde
         @BindView(R.id.tv_rank_num)
         TextView tvNum;
         @BindView(R.id.tv_rank_mobile)
-        TextView tvMobile;
+        TextView tvUserName;
         @BindView(R.id.tv_rank_like)
         TextView tvLike;
 

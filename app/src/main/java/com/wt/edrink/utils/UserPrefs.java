@@ -38,4 +38,8 @@ public class UserPrefs {
     public String getCupnum() {
         return SharedPref.getInstance(context).getString(KEY_CUP_NUM, null);
     }
+
+    public void clearCupnum() {
+        SharedPref.getInstance(context).putString(KEY_CUP_NUM, null);
+    }
 }

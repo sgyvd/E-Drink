@@ -26,6 +26,9 @@ public class Constants {
 
     //绑定设备
     public static final String URL_BING = BASE_URL + "/cup/bind";
+
+    //排行榜
+    public static final String URL_RANK = BASE_URL + "/data/rank";
 }
 
 

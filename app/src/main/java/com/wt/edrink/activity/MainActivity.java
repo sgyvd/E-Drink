@@ -58,7 +58,12 @@ public class MainActivity extends BaseActivity {
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                httpHomeInfo();
+                if (userPrefs.getCupnum() == null) {
+                    ToastUtils.showLong(context, "请先添加水杯");
+                    swipeLayout.setRefreshing(false);
+                } else {
+                    httpHomeInfo();
+                }
             }
         });
     }
@@ -103,26 +108,30 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSucceed(int what, Response<HomeBean> response) {
                 HomeBean data = response.get();
-                if (!TextUtils.isEmpty(data.getWater_temperature())) {
-                    tvWaterTemp.setText(data.getWater_temperature());
+                if (data == null) {
+                    ToastUtils.showLong(context, "网络请求错误");
+                } else {
+                    if (!TextUtils.isEmpty(data.getWater_temperature())) {
+                        tvWaterTemp.setText(data.getWater_temperature());
+                    }
+                    if (!TextUtils.isEmpty(data.getWater_level())) {
+                        tvWaterLevel.setText(data.getWater_level());
+                    }
+                    if (!TextUtils.isEmpty(data.getAir_temperature())) {
+                        tvAirTemp.setText(data.getAir_temperature());
+                    }
+                    if (!TextUtils.isEmpty(data.getAir_humidity())) {
+                        tvAirHumidity.setText(data.getAir_humidity());
+                    }
+                    String time = data.getMonth() + "-" + data.getDay() + " " + data.getHour() + "-" + data.getMinute();
+                    tvTime.setText(time);
                 }
-                if (!TextUtils.isEmpty(data.getWater_level())) {
-                    tvWaterLevel.setText(data.getWater_level());
-                }
-                if (!TextUtils.isEmpty(data.getAir_temperature())) {
-                    tvAirTemp.setText(data.getAir_temperature());
-                }
-                if (!TextUtils.isEmpty(data.getAir_humidity())) {
-                    tvAirHumidity.setText(data.getAir_humidity());
-                }
-                String time = data.getMonth() + "-" + data.getDay() + " " + data.getHour() + "-" + data.getMinute();
-                tvTime.setText(time);
                 swipeLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailed(int what, Response<HomeBean> response) {
-                ToastUtils.showLong(context, "网络错误");
+                ToastUtils.showLong(context, "网络请求失败");
             }
 
             @Override
