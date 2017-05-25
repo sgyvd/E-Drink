@@ -130,7 +130,7 @@ public class ScanActivity extends BaseActivity {
             public void onSucceed(int what, Response<CommonBean> response) {
                 CommonBean data = response.get();
                 if (data.getError_code() == 10009) {
-                    ToastUtils.showShort(context, "设备绑定成功");
+                    ToastUtils.showShort(context, "水杯绑定成功");
                     userPrefs.setDeviceId(deviceId);
                     context.finish();
                 } else {

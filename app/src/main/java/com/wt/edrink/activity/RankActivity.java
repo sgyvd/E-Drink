@@ -135,6 +135,8 @@ public class RankActivity extends BaseActivity {
                         ToastUtils.showShort(context, "请先公开您的数据");
                     } else if (data1.getError_code() == 10035) { //打开状态
                         httpPost();
+                    } else if (data1.getError_code() == 10011) {
+                        ToastUtils.showShort(context, "请先添加水杯");
                     } else {
                         ToastUtils.showShort(context, data1.getReason());
                     }

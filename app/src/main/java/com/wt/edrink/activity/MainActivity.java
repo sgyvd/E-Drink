@@ -145,6 +145,10 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         if (userPrefs.getDeviceId() == null) {
+            tvWaterTemp.setText("- -");
+            tvWaterLevel.setText("- -");
+            tvAirTemp.setText("- -");
+            tvAirHumidity.setText("- -");
             ToastUtils.showLong(context, "请先添加水杯");
         } else {
             httpHomeInfo();

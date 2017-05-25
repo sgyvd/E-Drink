@@ -42,14 +42,21 @@ public class MineActivity extends BaseActivity {
     public void initData(Bundle savedInstanceState) {
         setToolbarTitle("我的");
         setShowBack(true);
-
-        httpRankStatus();
     }
 
     @Override
     public void setListener() {
         super.setListener();
-
+        switchRank.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    httpRankSwitch(1);
+                } else {
+                    httpRankSwitch(0);
+                }
+            }
+        });
     }
 
     @Override
@@ -58,9 +65,12 @@ public class MineActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.ll_mine_select_device, R.id.tv_mine_quit})
+    @OnClick({R.id.ll_mine_info, R.id.ll_mine_select_device, R.id.tv_mine_quit})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.ll_mine_info:
+
+                break;
             case R.id.ll_mine_select_device:
                 Intents.getIntents().Intent(context, MyDevicesActivity.class, null);
                 break;
@@ -106,6 +116,7 @@ public class MineActivity extends BaseActivity {
             CommonBean data = (CommonBean) response.get();
             switch (what) {
                 case 0:
+                    switchRank.setEnabled(true);
                     Log.e(TAG, "排行榜状态error_code:" + data.getError_code() + "----reason:" + data.getReason() + "----result:" + data.getResult());
                     if (data.getError_code() == 10036) {
                         switchRank.setChecked(false);
@@ -115,23 +126,13 @@ public class MineActivity extends BaseActivity {
                         switchRank.setEnabled(false);
                     }
 
-                    switchRank.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked) {
-                                httpRankSwitch(1);
-                            } else {
-                                httpRankSwitch(0);
-                            }
-                        }
-                    });
                     break;
                 case 1:
                     Log.e(TAG, "选择排行榜error_code:" + data.getError_code() + "----reason:" + data.getReason() + "----result:" + data.getResult());
                     if (data.getError_code() == 10036) {
-                        ToastUtils.showShort(context, "关闭");
+
                     } else if (data.getError_code() == 10037) {
-                        ToastUtils.showShort(context, "打开");
+
                     } else {
                         ToastUtils.showShort(context, "失败");
                     }
@@ -150,12 +151,14 @@ public class MineActivity extends BaseActivity {
         }
     };
 
-
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
+        httpRankStatus();
         if (userPrefs.getDeviceId() != null) {
             tvDeviceId.setText(userPrefs.getDeviceId());
+        } else {
+            tvDeviceId.setText("");
         }
     }
 }

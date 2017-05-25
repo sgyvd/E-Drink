@@ -8,6 +8,7 @@ import com.wt.edrink.Constants;
 import com.wt.edrink.R;
 import com.wt.edrink.adapter.MyDeviceAdapter;
 import com.wt.edrink.base.BaseActivity;
+import com.wt.edrink.bean.CommonBean;
 import com.wt.edrink.bean.DeviceBean;
 import com.wt.edrink.bean.DeviceListBean;
 import com.wt.edrink.http.HttpManage;
@@ -81,6 +82,7 @@ public class MyDevicesActivity extends BaseActivity {
                     context.finish();
                     break;
                 case R.id.btn_mydevice_unbind:
+                    httpUnBind(model.getDevice_id());
                     break;
             }
         }
@@ -100,14 +102,14 @@ public class MyDevicesActivity extends BaseActivity {
 
             @Override
             public void onSucceed(int what, Response<DeviceListBean> response) {
-                DeviceListBean data = response.get();
-                Log.e(TAG, "我的设备列表error_code:" + data.getError_code() + "----reason:" + data.getReason() + "----result:" + data.getResult());
-                if (data.getError_code() == 10012) {
-                    adapter.setData(data.getResult());
-                } else if (data.getError_code() == 10013) {
+                DeviceListBean data1 = (DeviceListBean) response.get();
+                Log.e(TAG, "我的设备列表error_code:" + data1.getError_code() + "----reason:" + data1.getReason() + "----result:" + data1.getResult());
+                if (data1.getError_code() == 10012) {
+                    adapter.setData(data1.getResult());
+                } else if (data1.getError_code() == 10013) {
                     ToastUtils.showShort(context, "请先绑定水杯");
                 } else {
-                    ToastUtils.showShort(context, data.getReason());
+                    ToastUtils.showShort(context, data1.getReason());
                 }
             }
 
@@ -118,7 +120,47 @@ public class MyDevicesActivity extends BaseActivity {
 
             @Override
             public void onFinish(int what) {
-                rvDeviceLayout.refreshState(false);
+
+            }
+        });
+    }
+
+    /**
+     * 解绑
+     */
+    private void httpUnBind(final String deviceid) {
+        Request<CommonBean> request = new JavaBeanRequest<CommonBean>(Constants.URL_UN_BIND, CommonBean.class);
+        request.add(Constants.AUTH_KEY, getAuthKey());
+        request.add(Constants.DEVICE_ID, getDeviceId());
+        HttpManage.httpRequest(1, request, new OnResponseListener<CommonBean>() {
+            @Override
+            public void onStart(int what) {
+
+            }
+
+            @Override
+            public void onSucceed(int what, Response<CommonBean> response) {
+                CommonBean data2 = (CommonBean) response.get();
+                Log.e(TAG, "解绑设备error_code:" + data2.getError_code() + "----reason:" + data2.getReason() + "----result:" + data2.getResult());
+                if (data2.getError_code() == 10010) {
+                    if (deviceid.equals(getDeviceId())) {
+                        userPrefs.clearDeviceId();
+                    }
+                    ToastUtils.showShort(context, data2.getReason());
+                    httpMyDevice();
+                } else {
+                    ToastUtils.showShort(context, "解绑失败");
+                }
+            }
+
+            @Override
+            public void onFailed(int what, Response<CommonBean> response) {
+                ToastUtils.showLong(context, "网络请求失败");
+            }
+
+            @Override
+            public void onFinish(int what) {
+
             }
         });
     }

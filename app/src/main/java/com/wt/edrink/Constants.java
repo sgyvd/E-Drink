@@ -28,6 +28,8 @@ public class Constants {
 
     //绑定设备
     public static final String URL_BING = BASE_URL + "/cup/bind";
+    //解绑设备
+    public static final String URL_UN_BIND = BASE_URL + "/cup/unbind";
     //已绑定设备列表
     public static final String URL_DEVICE_LIST = BASE_URL + "/cup/device_list";
 

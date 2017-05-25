@@ -22,7 +22,7 @@ public abstract class BaseActivity extends XActivity {
     private Toolbar mToolbar;
     private TextView mToolbarTitle;
     private TextView mToolbarSubTitle;
-    private UserPrefs userPrefs = new UserPrefs(context);
+    public UserPrefs userPrefs = new UserPrefs(context);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
