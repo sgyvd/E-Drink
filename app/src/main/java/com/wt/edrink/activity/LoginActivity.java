@@ -122,7 +122,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onFailed(int what, Response<CommonBean> response) {
-                ToastUtils.showLong(context, "网络错误");
+                ToastUtils.showLong(context, "网络请求失败");
             }
 
             @Override

@@ -147,6 +147,7 @@ public class MyDevicesActivity extends BaseActivity {
                     if (deviceid.equals(getDeviceId())) {
                         userPrefs.clearDeviceId();
                     }
+                    adapter.clearData();
                     ToastUtils.showShort(context, data2.getReason());
                     httpMyDevice();
                 } else {

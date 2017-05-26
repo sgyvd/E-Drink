@@ -49,6 +49,6 @@ ext {
             "nohttp"         : "com.yanzhenjie.nohttp:nohttp:1.1.1",
             "nohttp-okhttp"  : "com.yanzhenjie.nohttp:okhttp:1.1.1",
             //时间选择器
-            "PickerView"     : "com.contrarywind:Android-PickerView:3.2.4"
+            "PickerView"     : "com.contrarywind:Android-PickerView:3.2.5"
     ]
 }

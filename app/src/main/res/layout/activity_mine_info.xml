@@ -9,7 +9,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_height="20dp" />
 
     <LinearLayout
         android:id="@+id/ll_info_birthday"
@@ -44,7 +44,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_height="20dp" />
 
     <LinearLayout
         android:id="@+id/ll_info_sex"
@@ -79,7 +79,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_height="20dp" />
 
     <LinearLayout
         android:id="@+id/ll_info_height"
@@ -105,6 +105,12 @@
             android:layout_weight="1"
             android:gravity="center_vertical|right" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="CM" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -114,7 +120,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_height="0.5dp"
+        android:background="@color/divide_line" />
 
     <LinearLayout
         android:id="@+id/ll_info_weight"
@@ -140,6 +147,12 @@
             android:layout_weight="1"
             android:gravity="center_vertical|right" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="KG" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -149,15 +162,55 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="20dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_info_status"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/item_press_color"
+        android:clickable="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="健康状态"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_info_status"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_black_right" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/btn_info_save"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@color/red"
         android:text="保存"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:visibility="gone" />
 
 </LinearLayout>

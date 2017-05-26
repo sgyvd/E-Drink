@@ -36,6 +36,7 @@ dependencies {
     compile rootProject.ext.dependencies["nohttp"]
     compile rootProject.ext.dependencies["nohttp-okhttp"]
     compile rootProject.ext.dependencies["circleimageview"]
+    compile rootProject.ext.dependencies["PickerView"]
 
     compile 'com.google.zxing:core:3.2.1'
     compile 'cn.bingoogolapple:bga-qrcodecore:1.1.7@aar'

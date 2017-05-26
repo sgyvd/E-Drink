@@ -15,6 +15,13 @@ public class Constants {
 
     public static final String SWITCH = "switch";
 
+    public static final String BIRTHDAY = "birthday";
+    public static final String SEX = "sex";
+    public static final String HEIGHT = "height";
+    public static final String WEIGHT = "weight";
+    public static final String HEALTHYSTATUS = "HealthyStatus";
+
+
     private static String BASE_URL = "http://182.254.159.215";
 
     //注册
@@ -47,6 +54,12 @@ public class Constants {
     public static final String URL_TODAY_TOTAL = BASE_URL + "/data/todayTotal";
     //健康值
     public static final String URL_HEALTH_STATUS = BASE_URL + "/data/healthyStatus";
+
+
+    //上传info
+    public static final String URL_UPDATE_INFO = BASE_URL + "/cup/device2userinfo";
+    //请求info
+    public static final String URL_SHOW_INFO = BASE_URL + "/cup/showUserinfo";
 
 }
 

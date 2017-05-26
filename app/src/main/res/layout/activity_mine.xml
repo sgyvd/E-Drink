@@ -10,7 +10,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +59,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="50dp" />
 
             <LinearLayout
                 android:id="@+id/ll_mine_select_device"
@@ -92,6 +93,10 @@
             </LinearLayout>
 
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/switch_mine_rank"
                 android:layout_width="match_parent"
@@ -102,17 +107,18 @@
                 android:text="公开数据到排行榜"
                 android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/tv_mine_quit"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@drawable/item_press_color"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="退出登录" />
-
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_mine_quit"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/item_press_color"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textColor="@color/red" />
 
 </LinearLayout>
