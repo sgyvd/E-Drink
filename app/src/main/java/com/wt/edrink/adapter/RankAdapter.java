@@ -37,7 +37,6 @@ public class RankAdapter extends SimpleRecAdapter<RankBean, RecyclerView.ViewHol
         ((mViewHolder) holder).tvNum.setText(position + 1 + "");
         ((mViewHolder) holder).tvUserName.setText(item.getUserName());
         ((mViewHolder) holder).tvHealth.setText(item.getHealthyStatus());
-        ((mViewHolder) holder).tvLike.setOnClickListener(onClickListener(position, item));
     }
 
     private View.OnClickListener onClickListener(final int position, final RankBean model) {
@@ -57,8 +56,6 @@ public class RankAdapter extends SimpleRecAdapter<RankBean, RecyclerView.ViewHol
         TextView tvUserName;
         @BindView(R.id.tv_rank_health_status)
         TextView  tvHealth;
-        @BindView(R.id.tv_rank_like)
-        TextView tvLike;
 
         public mViewHolder(View itemView) {
             super(itemView);

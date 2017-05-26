@@ -107,6 +107,35 @@
                 android:text="公开数据到排行榜"
                 android:textColor="@color/black" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_mine_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/item_press_color"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="手机饮水提醒"
+                android:textColor="@color/black" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/divide_line" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/switch_mine_cup"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/item_press_color"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="水杯饮水提醒"
+                android:textColor="@color/black" />
+
         </LinearLayout>
 
     </ScrollView>
@@ -119,6 +148,7 @@
         android:clickable="true"
         android:gravity="center"
         android:text="退出登录"
-        android:textColor="@color/red" />
+        android:textColor="@color/red"
+        android:textSize="16sp" />
 
 </LinearLayout>

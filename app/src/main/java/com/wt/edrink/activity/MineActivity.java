@@ -11,6 +11,7 @@ import com.wt.edrink.Constants;
 import com.wt.edrink.R;
 import com.wt.edrink.base.BaseActivity;
 import com.wt.edrink.bean.CommonBean;
+import com.wt.edrink.bean.HttpStatusBean;
 import com.wt.edrink.http.HttpManage;
 import com.wt.edrink.http.JavaBeanRequest;
 import com.wt.edrink.utils.Intents;
@@ -35,10 +36,14 @@ public class MineActivity extends BaseActivity {
 
     @BindView(R.id.tv_mine_username)
     TextView tvUserName;
-    @BindView(R.id.switch_mine_rank)
-    SwitchCompat switchRank;
     @BindView(R.id.tv_mine_device_id)
     TextView tvDeviceId;
+    @BindView(R.id.switch_mine_rank)
+    SwitchCompat switchRank;
+    @BindView(R.id.switch_mine_mobile)
+    SwitchCompat switchMobile;
+    @BindView(R.id.switch_mine_cup)
+    SwitchCompat switchCup;
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -59,6 +64,18 @@ public class MineActivity extends BaseActivity {
                 } else {
                     httpRankSwitch(0);
                 }
+            }
+        });
+        switchMobile.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
+        switchCup.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
             }
         });
     }
@@ -97,17 +114,17 @@ public class MineActivity extends BaseActivity {
     }
 
     /**
-     * 获取rank展示状态
+     * All状态
      */
     private void httpRankStatus() {
-        Request<CommonBean> request = new JavaBeanRequest<CommonBean>(Constants.URL_RANK_STATUS, CommonBean.class);
+        Request<HttpStatusBean> request = new JavaBeanRequest<HttpStatusBean>(Constants.URL_ALL_STATUS, HttpStatusBean.class);
         request.add(Constants.AUTH_KEY, getAuthKey());
         request.add(Constants.DEVICE_ID, getDeviceId());
         HttpManage.httpRequest(0, request, onResponseListener);
     }
 
     /**
-     * Rank开关
+     * 排行榜开关
      */
     private void httpRankSwitch(int isShow) {
         Request<CommonBean> request = new JavaBeanRequest<CommonBean>(Constants.URL_RANK_SWITCH, CommonBean.class);
@@ -115,6 +132,15 @@ public class MineActivity extends BaseActivity {
         request.add(Constants.DEVICE_ID, getDeviceId());
         request.add(Constants.SWITCH, isShow);
         HttpManage.httpRequest(1, request, onResponseListener);
+    }
+
+    /**
+     * 手机提醒开关
+     *
+     * @param isShow
+     */
+    private void httpMobileSwitch(int isShow) {
+        Request<CommonBean> request = new JavaBeanRequest<CommonBean>(Constants.URL_RANK_SWITCH, CommonBean.class);
     }
 
     private OnResponseListener onResponseListener = new OnResponseListener() {
@@ -125,25 +151,27 @@ public class MineActivity extends BaseActivity {
 
         @Override
         public void onSucceed(int what, Response response) {
-            CommonBean data = (CommonBean) response.get();
+
             switch (what) {
                 case 0:
+                    HttpStatusBean data = (HttpStatusBean) response.get();
                     switchRank.setEnabled(true);
                     Log.e(TAG, "排行榜状态error_code:" + data.getError_code() + "----reason:" + data.getReason() + "----result:" + data.getResult());
-                    if (data.getError_code() == 10036) {
-                        switchRank.setChecked(false);
-                    } else if (data.getError_code() == 10035) {
-                        switchRank.setChecked(true);
+                    if (data.getError_code() == 10049) {
+
                     } else {
                         switchRank.setEnabled(false);
+                        switchMobile.setEnabled(false);
+                        switchCup.setEnabled(false);
                     }
 
                     break;
                 case 1:
-                    Log.e(TAG, "选择排行榜error_code:" + data.getError_code() + "----reason:" + data.getReason() + "----result:" + data.getResult());
-                    if (data.getError_code() == 10037) {
+                    CommonBean data1 = (CommonBean) response.get();
+                    Log.e(TAG, "选择排行榜error_code:" + data1.getError_code() + "----reason:" + data1.getReason() + "----result:" + data1.getResult());
+                    if (data1.getError_code() == 10037) {
 
-                    } else if (data.getError_code() == 10038) {
+                    } else if (data1.getError_code() == 10038) {
 
                     } else {
                         ToastUtils.showShort(context, "失败");

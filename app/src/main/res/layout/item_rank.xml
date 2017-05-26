@@ -31,22 +31,11 @@
             android:id="@+id/tv_rank_health_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="30dp"
-            android:layout_toLeftOf="@+id/tv_rank_like"
             android:textColor="#6ADA82"
             android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/tv_rank_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:drawableBottom="@drawable/ic_like"
-            android:gravity="center"
-            android:text="0" />
 
     </RelativeLayout>
 

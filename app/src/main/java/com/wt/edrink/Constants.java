@@ -44,16 +44,26 @@ public class Constants {
 
     //排行榜
     public static final String URL_RANK = BASE_URL + "/data/rank";
-    //排行榜状态
-    public static final String URL_RANK_STATUS = BASE_URL + "/data/ShowRankStatus";
+
+    //全部状态
+    public static final String URL_ALL_STATUS = BASE_URL + "/notice/getNoticeStatus";
+
     //排行榜开关
     public static final String URL_RANK_SWITCH = BASE_URL + "/data/SwitchRank";
+    //手机提醒开关
+    public static final String URL_MOBILE_SWITCH = BASE_URL + "/notice/switchMobileNotice";
+    //水杯提醒开关
+    public static final String URL_CUP_SWITCH = BASE_URL + "/notice/switchCupNotice";
 
 
     //今日饮水量
     public static final String URL_TODAY_TOTAL = BASE_URL + "/data/todayTotal";
     //健康值
     public static final String URL_HEALTH_STATUS = BASE_URL + "/data/healthyStatus";
+    //饮水时间表
+    public static final String URL_DRINK_TIME = BASE_URL + "/cup/drinkTime";
+    //饮水时间修改上传
+    public static final String URL_DRINK_TIME_UPDATE = BASE_URL + "/cup/changeTime";
 
 
     //上传info

@@ -76,13 +76,7 @@ public class RankActivity extends BaseActivity {
                 @Override
                 public void onItemClick(int position, RankBean model, int tag, RecyclerView.ViewHolder holder) {
                     super.onItemClick(position, model, tag, holder);
-                    switch (tag) {
-                        case R.id.tv_rank_like:
-                            ToastUtils.showShort(context, "点赞");
-                            break;
-                    }
                 }
-
             };
 
     /**

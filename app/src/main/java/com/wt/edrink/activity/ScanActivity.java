@@ -94,7 +94,6 @@ public class ScanActivity extends BaseActivity {
         @Override
         public void onScanQRCodeSuccess(String result) {
             vibrator();
-            ToastUtils.showShort(context, result);
             Gson gson = new Gson();
             ScanBean data = gson.fromJson(result, ScanBean.class);
             if (data.getDevice_pwd() == null || data.getDevice_id() == null) {

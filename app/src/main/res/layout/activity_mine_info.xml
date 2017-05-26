@@ -109,7 +109,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="CM" />
+            android:paddingLeft="5dp"
+            android:text="cm" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -151,7 +152,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="KG" />
+            android:paddingLeft="5dp"
+            android:text="kg" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -205,12 +207,10 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:background="@color/red"
         android:text="保存"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:visibility="gone" />
 
 </LinearLayout>
