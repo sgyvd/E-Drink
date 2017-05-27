@@ -30,6 +30,9 @@ public class Constants {
     //登录
     public static final String URL_LOGIN = BASE_URL + "/user/login";
 
+    //JPUSH ID上传
+    public static final String URL_ID_UPDATE = BASE_URL +"/cup/updateJpush";
+
     //首页
     public static final String URL_HOME_PAGE = "https://dddddooo.wilddogio.com/";
 

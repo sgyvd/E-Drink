@@ -13,7 +13,6 @@ import com.wt.edrink.bean.DeviceBean;
 import com.wt.edrink.bean.DeviceListBean;
 import com.wt.edrink.http.HttpManage;
 import com.wt.edrink.http.JavaBeanRequest;
-import com.wt.edrink.utils.UserPrefs;
 import com.yanzhenjie.nohttp.rest.OnResponseListener;
 import com.yanzhenjie.nohttp.rest.Request;
 import com.yanzhenjie.nohttp.rest.Response;
@@ -77,13 +76,34 @@ public class MyDevicesActivity extends BaseActivity {
             super.onItemClick(position, model, tag, holder);
             switch (tag) {
                 case R.id.rl_mydevice:
-                    UserPrefs userPrefs = new UserPrefs(context);
                     userPrefs.setDeviceId(model.getDevice_id());
+                    HttpManage.httpUpdateJpush(getAuthKey(), model.getDevice_id(), getJPushDeviceId(context), new OnResponseListener() {
+                        @Override
+                        public void onStart(int what) {
+
+                        }
+
+                        @Override
+                        public void onSucceed(int what, Response response) {
+                            CommonBean data = (CommonBean) response.get();
+                            Log.e(TAG, "JPush--error_code:" + data.getError_code() + "----reason:" + data.getReason() + "----result:" + data.getResult());
+                        }
+
+                        @Override
+                        public void onFailed(int what, Response response) {
+                            Log.e(TAG, "JPush--" + "失败");
+                        }
+
+                        @Override
+                        public void onFinish(int what) {
+
+                        }
+                    });
                     context.finish();
                     break;
                 case R.id.btn_mydevice_unbind:
                     httpUnBind(model.getDevice_id());
-                    Log.e(TAG,model.getDevice_id());
+                    Log.e(TAG, model.getDevice_id());
                     break;
             }
         }

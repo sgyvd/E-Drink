@@ -8,7 +8,7 @@ import com.wt.edrink.Constants;
 import com.wt.edrink.R;
 import com.wt.edrink.adapter.RankAdapter;
 import com.wt.edrink.base.BaseActivity;
-import com.wt.edrink.bean.CommonBean;
+import com.wt.edrink.bean.HttpStatusBean;
 import com.wt.edrink.bean.RankBean;
 import com.wt.edrink.bean.RankListBean;
 import com.wt.edrink.http.HttpManage;
@@ -92,7 +92,7 @@ public class RankActivity extends BaseActivity {
      * 判断排行榜是否打开
      */
     private void httpRankisOpen() {
-        Request<CommonBean> request = new JavaBeanRequest<CommonBean>(Constants.URL_RANK_STATUS, CommonBean.class);
+        Request<HttpStatusBean> request = new JavaBeanRequest<HttpStatusBean>(Constants.URL_ALL_STATUS, HttpStatusBean.class);
         request.add(Constants.AUTH_KEY, getAuthKey());
         request.add(Constants.DEVICE_ID, getDeviceId());
         HttpManage.httpRequest(1, request, onResponseListener);
@@ -123,12 +123,14 @@ public class RankActivity extends BaseActivity {
                     rvRankLayout.refreshState(false);
                     break;
                 case 1:
-                    CommonBean data1 = (CommonBean) response.get();
-                    Log.e(TAG, "排行榜状态error_code:" + data1.getError_code() + "----reason:" + data1.getReason() + "----result:" + data1.getResult());
-                    if (data1.getError_code() == 10036) { //关闭状态
-                        ToastUtils.showShort(context, "请先公开您的数据");
-                    } else if (data1.getError_code() == 10035) { //打开状态
-                        httpPost();
+                    HttpStatusBean data1 = (HttpStatusBean) response.get();
+                    Log.e(TAG, "状态error_code:" + data1.getError_code() + "----reason:" + data1.getReason() + "----result:" + data1.getResult());
+                    if (data1.getError_code() == 10049) {
+                        if (data1.getResult().getShowRank().equals("0")) {
+                            ToastUtils.showShort(context, "请先公开您的数据");
+                        } else {
+                            httpPost();
+                        }
                     } else if (data1.getError_code() == 10011) {
                         ToastUtils.showShort(context, "请先添加水杯");
                     } else {
@@ -140,7 +142,11 @@ public class RankActivity extends BaseActivity {
 
         @Override
         public void onFailed(int what, Response response) {
-            ToastUtils.showLong(context, "网络请求失败");
+            if (what == 1) {
+                ToastUtils.showShort(context, "请先添加水杯");
+            } else {
+                ToastUtils.showLong(context, "网络请求失败");
+            }
         }
 
         @Override

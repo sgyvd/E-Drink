@@ -5,6 +5,8 @@ import android.app.Application;
 import com.yanzhenjie.nohttp.NoHttp;
 import com.yanzhenjie.nohttp.OkHttpNetworkExecutor;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by 美时美课 on 2017/5/23.
  */
@@ -18,8 +20,6 @@ public class MyApp extends Application {
         super.onCreate();
         INSTANCE = this;
 
-
-
         NoHttp.initialize(this, new NoHttp.Config()
                 // 设置全局连接超时时间，单位毫秒，默认10s。
                 .setConnectTimeout(30 * 1000)
@@ -31,6 +31,13 @@ public class MyApp extends Application {
 
         /*Logger.setDebug(true); // 开启NoHttp调试模式。
         Logger.setTag("NoHttpSample----"); // 设置NoHttp打印Log的TAG。*/
+
+        //JPush
+        JPushInterface.setDebugMode(true);//设置为调试模式，具体发布的时候可以直接设置为false
+        JPushInterface.init(this);
+
+
+
     }
 
     public static MyApp getInstance() {

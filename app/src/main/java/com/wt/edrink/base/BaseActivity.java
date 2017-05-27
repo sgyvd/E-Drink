@@ -1,5 +1,6 @@
 package com.wt.edrink.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,6 +13,7 @@ import cn.droidlover.xdroid.base.XActivity;
 import cn.droidlover.xdroid.kit.ExitApp;
 import cn.droidlover.xdroid.kit.NetWorkUtils;
 import cn.droidlover.xdroid.kit.ToastUtils;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by 美时美课 on 2017/5/23.
@@ -47,9 +49,16 @@ public abstract class BaseActivity extends XActivity {
     public String getAuthKey() {
         return userPrefs.getAuthKey();
     }
-    public String getDeviceId(){
+
+    public String getDeviceId() {
         return userPrefs.getDeviceId();
     }
+
+    public static String getJPushDeviceId(Context context) {
+        String registrationid = JPushInterface.getRegistrationID(context);
+        return registrationid;
+    }
+
 
     public void setToolbarTitle(String title) {
         getToolbarTitle().setText(title);

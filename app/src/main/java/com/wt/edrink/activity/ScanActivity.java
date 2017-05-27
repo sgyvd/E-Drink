@@ -17,7 +17,6 @@ import com.wt.edrink.bean.CommonBean;
 import com.wt.edrink.bean.ScanBean;
 import com.wt.edrink.http.HttpManage;
 import com.wt.edrink.http.JavaBeanRequest;
-import com.wt.edrink.utils.UserPrefs;
 import com.yanzhenjie.nohttp.rest.OnResponseListener;
 import com.yanzhenjie.nohttp.rest.Request;
 import com.yanzhenjie.nohttp.rest.Response;
@@ -39,7 +38,6 @@ public class ScanActivity extends BaseActivity {
     SwitchCompat switchLight;
 
     private Toolbar toolbar;
-    private UserPrefs userPrefs;
     private ProgressDialog progressDialog;
 
     @Override
@@ -53,7 +51,6 @@ public class ScanActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-        userPrefs = new UserPrefs(context);
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("正在绑定...");
 
@@ -131,6 +128,28 @@ public class ScanActivity extends BaseActivity {
                 if (data.getError_code() == 10009) {
                     ToastUtils.showShort(context, "水杯绑定成功");
                     userPrefs.setDeviceId(deviceId);
+                    HttpManage.httpUpdateJpush(getAuthKey(), deviceId, getJPushDeviceId(context), new OnResponseListener() {
+                        @Override
+                        public void onStart(int what) {
+
+                        }
+
+                        @Override
+                        public void onSucceed(int what, Response response) {
+                            CommonBean data = (CommonBean) response.get();
+                            Log.e(TAG, "JPush--error_code:" + data.getError_code() + "----reason:" + data.getReason() + "----result:" + data.getResult());
+                        }
+
+                        @Override
+                        public void onFailed(int what, Response response) {
+                            Log.e(TAG, "JPush--" + "失败");
+                        }
+
+                        @Override
+                        public void onFinish(int what) {
+
+                        }
+                    });
                     context.finish();
                 } else {
                     ToastUtils.showShort(context, data.getReason());

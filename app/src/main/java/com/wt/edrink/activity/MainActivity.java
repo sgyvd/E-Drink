@@ -1,5 +1,6 @@
 package com.wt.edrink.activity;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,7 +17,6 @@ import com.wt.edrink.bean.HomeBean;
 import com.wt.edrink.http.HttpManage;
 import com.wt.edrink.http.JavaBeanRequest;
 import com.wt.edrink.utils.Intents;
-import com.wt.edrink.utils.UserPrefs;
 import com.yanzhenjie.nohttp.RequestMethod;
 import com.yanzhenjie.nohttp.rest.OnResponseListener;
 import com.yanzhenjie.nohttp.rest.Request;
@@ -25,12 +25,12 @@ import com.yanzhenjie.nohttp.rest.Response;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.droidlover.xdroid.kit.ToastUtils;
+import cn.jpush.android.api.BasicPushNotificationBuilder;
+import cn.jpush.android.api.JPushInterface;
 
 
 public class MainActivity extends BaseActivity {
     private String TAG = "MainActivity";
-
-    private final static int HTTP_HOME_PAGE = 01;
 
     @BindView(R.id.swipe_main)
     SwipeRefreshLayout swipeLayout;
@@ -45,14 +45,18 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tv_air_humidity)
     TextView tvAirHumidity;
 
-
-    private UserPrefs userPrefs;
-
-
     @Override
     public void initData(Bundle savedInstanceState) {
-        userPrefs = new UserPrefs(context);
+        BasicPushNotificationBuilder builder = new BasicPushNotificationBuilder(this);
+        builder.statusBarDrawable = R.drawable.jpush_notification_icon;
+        builder.notificationFlags = Notification.FLAG_AUTO_CANCEL
+                | Notification.FLAG_SHOW_LIGHTS;  //设置为自动消失和呼吸灯闪烁
+        builder.notificationDefaults = Notification.DEFAULT_SOUND
+                | Notification.DEFAULT_VIBRATE
+                | Notification.DEFAULT_LIGHTS;  // 设置为铃声、震动、呼吸灯闪烁都要
+        JPushInterface.setPushNotificationBuilder(1, builder);
     }
+
 
     @Override
     public void setListener() {
@@ -98,57 +102,65 @@ public class MainActivity extends BaseActivity {
      * http首页数据
      */
     private void httpHomeInfo() {
-
         String url = Constants.URL_HOME_PAGE + userPrefs.getDeviceId() + "/latest.json";
         Log.e(TAG, "--------------" + url);
-
         Request<HomeBean> request = new JavaBeanRequest<HomeBean>(url, RequestMethod.GET, HomeBean.class);
         // 添加到请求队列
-        HttpManage.httpRequest(HTTP_HOME_PAGE, request, new OnResponseListener<HomeBean>() {
-            @Override
-            public void onStart(int what) {
-                swipeLayout.setRefreshing(true);
-            }
-
-            @Override
-            public void onSucceed(int what, Response<HomeBean> response) {
-                HomeBean data = response.get();
-                if (data == null) {
-                    tvWaterTemp.setText("- -");
-                    tvWaterLevel.setText("- -");
-                    tvAirTemp.setText("- -");
-                    tvAirHumidity.setText("- -");
-                    ToastUtils.showShort(context, "无数据");
-                } else {
-                    if (!TextUtils.isEmpty(data.getWater_temperature())) {
-                        tvWaterTemp.setText(data.getWater_temperature());
-                    }
-                    if (!TextUtils.isEmpty(data.getWater_level())) {
-                        tvWaterLevel.setText(data.getWater_level());
-                    }
-                    if (!TextUtils.isEmpty(data.getAir_temperature())) {
-                        tvAirTemp.setText(data.getAir_temperature());
-                    }
-                    if (!TextUtils.isEmpty(data.getAir_humidity())) {
-                        tvAirHumidity.setText(data.getAir_humidity());
-                    }
-                    String time = data.getMonth() + "-" + data.getDay() + " " + data.getHour() + ":" + data.getMinute();
-                    tvTime.setText(time);
-                }
-                swipeLayout.setRefreshing(false);
-            }
-
-            @Override
-            public void onFailed(int what, Response<HomeBean> response) {
-                ToastUtils.showLong(context, "网络请求失败");
-            }
-
-            @Override
-            public void onFinish(int what) {
-
-            }
-        });
+        HttpManage.httpRequest(0, request, onResponseListener);
     }
+
+    private OnResponseListener onResponseListener = new OnResponseListener() {
+        @Override
+        public void onStart(int what) {
+
+        }
+
+        @Override
+        public void onSucceed(int what, Response response) {
+            switch (what) {
+                case 0:
+                    HomeBean data = (HomeBean) response.get();
+                    if (data == null) {
+                        tvWaterTemp.setText("- -");
+                        tvWaterLevel.setText("- -");
+                        tvAirTemp.setText("- -");
+                        tvAirHumidity.setText("- -");
+                        ToastUtils.showShort(context, "无数据");
+                    } else {
+                        if (!TextUtils.isEmpty(data.getWater_temperature())) {
+                            tvWaterTemp.setText(data.getWater_temperature());
+                        }
+                        if (!TextUtils.isEmpty(data.getWater_level())) {
+                            tvWaterLevel.setText(data.getWater_level());
+                        }
+                        if (!TextUtils.isEmpty(data.getAir_temperature())) {
+                            tvAirTemp.setText(data.getAir_temperature());
+                        }
+                        if (!TextUtils.isEmpty(data.getAir_humidity())) {
+                            tvAirHumidity.setText(data.getAir_humidity());
+                        }
+                        String time = data.getMonth() + "-" + data.getDay() + " " + data.getHour() + ":" + data.getMinute();
+                        tvTime.setText(time);
+                    }
+                    swipeLayout.setRefreshing(false);
+                    break;
+            }
+        }
+
+        @Override
+        public void onFailed(int what, Response response) {
+            switch (what) {
+                case 0:
+                    ToastUtils.showLong(context, "网络请求失败");
+                    break;
+            }
+        }
+
+        @Override
+        public void onFinish(int what) {
+
+        }
+    };
 
     @Override
     protected void onResume() {
