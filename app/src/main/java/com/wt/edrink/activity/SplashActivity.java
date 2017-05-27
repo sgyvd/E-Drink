@@ -1,9 +1,11 @@
 package com.wt.edrink.activity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.wt.edrink.R;
 import com.wt.edrink.base.BaseActivity;
@@ -12,18 +14,27 @@ import com.wt.edrink.utils.UserPrefs;
 
 import java.lang.ref.WeakReference;
 
+import butterknife.BindView;
+
 /**
  * Created by 美时美课 on 2017/5/24.
  */
 
-public class SplashActivity extends BaseActivity{
+public class SplashActivity extends BaseActivity {
     private final static int JUMP_TO_NEXT = 1;
+
+    @BindView(R.id.tv_splash)
+    TextView tvSplash;
 
     private MyHandler handler = new MyHandler(SplashActivity.this);
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/a.ttf");
+        tvSplash.setTypeface(typeface);
+
         handler.sendEmptyMessageDelayed(JUMP_TO_NEXT, 2000);
+
     }
 
     @Override

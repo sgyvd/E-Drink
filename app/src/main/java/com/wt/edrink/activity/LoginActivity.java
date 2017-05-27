@@ -1,11 +1,13 @@
 package com.wt.edrink.activity;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.wt.edrink.Constants;
 import com.wt.edrink.R;
@@ -32,6 +34,8 @@ import cn.droidlover.xdroid.kit.ToastUtils;
 public class LoginActivity extends BaseActivity {
     private static String TAG = "LoginActivity";
 
+    @BindView(R.id.tv_login_name)
+    TextView tvName;
     @BindView(R.id.et_login_username)
     EditText etUserName;
     @BindView(R.id.et_login_password)
@@ -44,6 +48,9 @@ public class LoginActivity extends BaseActivity {
 
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("正在登录...");
+
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/a.ttf");
+        tvName.setTypeface(typeface);
 
     }
 

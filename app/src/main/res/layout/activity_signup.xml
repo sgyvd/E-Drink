@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,14 +16,14 @@
         <EditText
             android:id="@+id/et_signup_username"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginTop="16dp"
-            android:ems="10"
+            android:background="@drawable/input_nor"
             android:hint="手机号"
             android:inputType="number"
             android:maxLength="11"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" />
+            android:paddingLeft="10dp"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/et_signup_password"
@@ -32,10 +31,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Auth_code"
             android:layout_marginTop="15dp"
-            android:ems="10"
+            android:background="@drawable/input_nor"
             android:hint="密码"
             android:inputType="textPassword"
-            android:paddingLeft="15dp" />
+            android:paddingLeft="10dp"
+            android:textSize="16sp" />
 
         <CheckBox
             android:id="@+id/cb_signup"
@@ -52,9 +52,9 @@
         <Button
             android:id="@+id/btn_signup"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginTop="15dp"
-            android:background="#5893FF"
+            android:background="@color/blue"
             android:text="立即注册"
             android:textColor="@color/white"
             android:textSize="18sp" />
