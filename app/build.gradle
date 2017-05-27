@@ -38,7 +38,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile rootProject.ext.dependencies["appcompat-v7"]
     compile rootProject.ext.dependencies["design"]
-    compile rootProject.ext.dependencies["constraint"]
     compile rootProject.ext.dependencies["cardview-v7"]
 
     compile project(':library')
