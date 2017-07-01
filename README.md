@@ -1,6 +1,6 @@
 # 项目说明
 - 硬件端（c语言）
--   [服务端（PHP）](https://github.com/wangtaoT/E-Drink)
+-   [服务端（PHP）](https://github.com/jinfeijie/E-Drink)
 - 手机端（Android）
 
 
