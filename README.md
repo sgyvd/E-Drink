@@ -5,8 +5,8 @@
 
 
 ### 本文主要介绍Andeoid端
-#### 所用开源库
-1. [NoHttp](https://github.com/yanzhenjie/NoHttp "NoHttp")
-2. [butterknife](https://github.com/JakeWharton/butterknife "butterknife")
-3. [zxing](https://github.com/bingoogolapple/BGAQRCode-Android "zxing")
+#### 所用第三方库
+1. NoHttp 网络请求
+2. butterknife 注解绑定
+3. zxing 扫描二维码
 
